@@ -43,7 +43,7 @@ function App() {
       {definition.map((def) => (
         <ul>{def.phonetics.map((phonetics:any) => 
           <p> 
-            <i>{phonetics.text ? phonetics.text + "\n": ""}</i>
+            <i>{phonetics.audio && phonetics.text ? phonetics.text + "\n": ""}</i>
             {phonetics.audio && phonetics.text ?             
             <audio 
             src = {phonetics.audio}
@@ -61,9 +61,11 @@ function App() {
             <p>
             <i>{s.partOfSpeech}</i>
             <li>{d.definition}</li>
-            <i>{ d.example ? "Example: " + d.example +"\n": ""}</i>
-            <b>{d.synonyms.map((synonym: any) =>  synonym) == "" ? "" : "Synonyms: " + d.synonyms.join(', ') +"\n"}</b>
-            <b>{d.antonyms.map((antonyms: any) =>  antonyms) == "" ? "" : "Antonyms: " + d.antonyms.join(', ') +"\n"}</b>
+            <i>{d.example ? "Example: " + d.example +"\n": ""}</i>
+            <b>{s.synonyms.join(', ') === "" ? "" :  "Synonyms: "}</b>
+            <i>{s.synonyms.join(', ') +"\n"}</i>
+            <b>{s.antonyms.join(', ') === "" ? "" : "Antonyms: "}</b>
+            <i>{s.antonyms.join(', ') +"\n"}</i>
             </p>
             )))}
           </ul>
