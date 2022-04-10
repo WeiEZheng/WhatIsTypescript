@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
-import { text } from 'stream/consumers';
 
 function App() {
   const [word, setWord] = useState("");
@@ -42,18 +41,22 @@ function App() {
         <ul>{def.phonetics.map((phonetics:any) => (phonetics.text))}</ul>
       ))}
     </main>
-    <main className="container">
+    <main className="container"
+    style={{
+      whiteSpace : 'pre-line'
+    }}>
       {definition.map((def) => (
         <ul>{def.meanings.map((s: any) =>
           s.definitions.map((d: any) => (
             <p>
             <i>{s.partOfSpeech}</i>
             <li>{d.definition}</li>
-            <b>Synonyms: </b>
-            <text>{d.synonyms.map((synonym: any) =>  synonym + '\n')}</text>
-            <br></br>
-            <b>Antonyms: </b>
-            <text>{d.antonyms.map((antonyms: any) =>  antonyms + '\n')}</text>
+            <i>{ d.example ? "Example: " + d.example : ""}</i>
+            <b>{d.synonyms.map((synonym: any) =>  synonym) == "" ? "" : "Synonyms: " }</b>
+            <text>{d.synonyms.map((synonym: any) =>  '\n'+synonym) }</text>
+            {d.synonyms.map((synonym: any) =>  synonym) == "" ? "" : <br></br> }
+            <b>{d.antonyms.map((antonyms: any) =>  antonyms) == "" ? "" : "Antonyms: " }</b>
+            <text>{d.antonyms.map((antonyms: any) =>  '\n'+antonyms)}</text>
             </p>
             )))}
           </ul>
