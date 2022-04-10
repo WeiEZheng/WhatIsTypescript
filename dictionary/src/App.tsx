@@ -5,7 +5,7 @@ import { text } from 'stream/consumers';
 
 function App() {
   const [word, setWord] = useState("");
-  const [definition, setDefintion] = useState([]);
+  const [definition, setDefintion] = useState<any[]>([]);
 
   const dictionaryApi = async (word: string) => {
     try {
@@ -33,7 +33,10 @@ function App() {
   return (      
   <div className="App">
     <header>{word}</header>
-    <li>{}</li>
+    {definition.map((def) => 
+    <li>Definition: {def.meanings[0].definitions[0].definition}
+    </li>
+    )}
   </div> 
 );
 }
