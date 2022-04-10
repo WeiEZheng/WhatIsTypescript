@@ -37,21 +37,6 @@ function App() {
       fontSize : 60
     }}>{word}</main>
     <main className="container"
-        style={{
-          whiteSpace : 'pre-line'
-        }}>
-      {definition.map((def) => (
-        <ul>{def.phonetics.map((phonetics:any) => 
-          <p> 
-            <i>{phonetics.audio && phonetics.text ? phonetics.text + "\n": ""}</i>
-            {phonetics.audio && phonetics.text ?             
-            <audio 
-            src = {phonetics.audio}
-            controls></audio>: ""}
-          </p>)}</ul>
-      ))}
-    </main>
-    <main className="container"
     style={{
       whiteSpace : 'pre-line'
     }}>
@@ -59,13 +44,22 @@ function App() {
         <ul>{def.meanings.map((s: any) =>
           s.definitions.map((d: any) => (
             <p>
+            {def.phonetics.map((phonetics:any) => 
+            <p> 
+            <i>{phonetics.audio && phonetics.text ? phonetics.text + "\n": ""}</i>
+            {phonetics.audio && phonetics.text ?             
+            <audio 
+            src = {phonetics.audio}
+            controls></audio>: ""}
+            </p>)}
             <i>{s.partOfSpeech}</i>
             <li>{d.definition}</li>
             <i>{d.example ? "Example: " + d.example +"\n": ""}</i>
-            <b>{s.synonyms.join(', ') === "" ? "" :  "Synonyms: "}</b>
-            <i>{s.synonyms.join(', ') +"\n"}</i>
+            <b>{s.synonyms.join(', ') === "" ? "" : "Synonyms: "}</b>
+            <i>{s.synonyms.join(', ') === "" ? "" : s.synonyms.join(', ') +"\n"}</i>
             <b>{s.antonyms.join(', ') === "" ? "" : "Antonyms: "}</b>
-            <i>{s.antonyms.join(', ') +"\n"}</i>
+            <i>{s.antonyms.join(', ') === "" ? "" : s.antonyms.join(', ') +"\n"}</i>
+            <text>_______________________________________________________________________</text>
             </p>
             )))}
           </ul>
