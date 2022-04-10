@@ -24,6 +24,7 @@ function App() {
     setWord(text);
     return false;
   }
+  
   useEffect(()=>{
       dictionaryApi(word);
   },[word])
@@ -32,12 +33,33 @@ function App() {
   
   return (      
   <div className="App">
-    <header>{word}</header>
-    {definition.map((def) => 
-    <li>Definition: {def.meanings[0].definitions[0].definition}
-    </li>
-    )}
-  </div> 
+    <main className="container"
+    style={{
+      fontSize : 60
+    }}>{word}</main>
+    <main className="container">
+      {definition.map((def) => (
+        <ul>{def.phonetics.map((phonetics:any) => (phonetics.text))}</ul>
+      ))}
+    </main>
+    <main className="container">
+      {definition.map((def) => (
+        <ul>{def.meanings.map((s: any) =>
+          s.definitions.map((d: any) => (
+            <p>
+            <i>{s.partOfSpeech}</i>
+            <li>{d.definition}</li>
+            <b>Synonyms: </b>
+            <text>{d.synonyms.map((synonym: any) =>  synonym + '\n')}</text>
+            <br></br>
+            <b>Antonyms: </b>
+            <text>{d.antonyms.map((antonyms: any) =>  antonyms + '\n')}</text>
+            </p>
+            )))}
+          </ul>
+      ))}
+    </main>
+</div> 
 );
 }
 
